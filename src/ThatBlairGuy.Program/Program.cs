@@ -6,43 +6,37 @@ using ThatBlairGuy.Math;
 
 namespace ThatBlairGuy
 {
+    /// <summary>
+    /// Runs a series of speed tests against the various methods for calculating factorials.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            for(int i = 0; i < 21; i++)
-            {
-                long iterative = Factorial.DoIteratively(i);
-                long quick = Factorial.DoQuickly(i);
-                long recursive = Factorial.DoRecursively(i);
-                BigInteger safe = Factorial.DoSafelyIteratively(i);
+            BenchMarker bench = new BenchMarker();
 
-                System.Console.WriteLine($"{i}\t{iterative:N0}\t{quick:N0}\t{recursive:N0}\t{safe:N0}");
-            }
+            // Timing for methods returning a long.
+            TimeSpan iterativeTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoIteratively);
+            TimeSpan recursiveTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoRecursively);
+            TimeSpan quickTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoQuickly);
+            TimeSpan checkedTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoIterativelyWithChecking);
 
+            // Timing for methods returning a BigInteger.
+            TimeSpan safeIterativeTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoSafelyIteratively);
+            TimeSpan safeRecursiveTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoSafelyRecursively);
+            TimeSpan safeQuickTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoSafelyQuickly);
 
-            Stopwatch stopwatch = new Stopwatch();
-            long junk = -1;
+            String FormatElapsed(TimeSpan ts) => String.Format($"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}")
 
-            stopwatch.Start();
-            for(int i = 0; i < int.MaxValue; ++i)
-            {
-                int factor = getFactor();
-                junk ^= Factorial.DoIteratively(factor);
-            }
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
+            System.Console.WriteLine($"Iterative ran in {FormatElapsed(iterativeTime)}");
+            System.Console.WriteLine($"Recursive ran in {FormatElapsed(recursiveTime)}");
+            System.Console.WriteLine($"Quickly ran in {FormatElapsed(quickTime)}");
+            System.Console.WriteLine($"Iteratively with checking ran in {FormatElapsed(checkedTime)}");
 
-            string elapsedTime = String.Format($"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}");
-            System.Console.WriteLine($"Ran in {elapsedTime}");
-            System.Console.WriteLine($"Junk: {junk}");
+            System.Console.WriteLine($"BigInteger Iterative ran in {FormatElapsed(safeIterativeTime)}");
+            System.Console.WriteLine($"BigInteger Recursive ran in {FormatElapsed(safeRecursiveTime)}");
+            System.Console.WriteLine($"BigInteger Quickly ran in {FormatElapsed(safeQuickTime)}");
+
         }
-
-        private static Random rand = new Random();
-        private static int getFactor()
-        {
-            return rand.Next(21);
-        }
-
     }
 }
