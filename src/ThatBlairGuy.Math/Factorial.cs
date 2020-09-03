@@ -74,7 +74,7 @@ namespace ThatBlairGuy.Math
         /// </summary>
         /// <param name="n">The number to calculate the factorial for.</param>
         /// <returns>The BigInteger value of n-factorial.</returns>
-        public static BigInteger DoSafelyIteratively(long n)
+        public static BigInteger DoBigIteratively(long n)
         {
             if (n < 0)
                 throw new ArgumentException($"'{nameof(n)}' must be non-negative.");
@@ -96,7 +96,7 @@ namespace ThatBlairGuy.Math
         /// </summary>
         /// <param name="n">The number to calculate the factorial for.</param>
         /// <returns>n-factorial</returns>
-        public static BigInteger DoSafelyRecursively(long n)
+        public static BigInteger DoBigRecursively(long n)
         {
             if (n < 0)
                 throw new ArgumentException($"'{nameof(n)}' must be non-negative.");
@@ -104,7 +104,7 @@ namespace ThatBlairGuy.Math
             if (n == 0 || n == 1)
                 return 1;
 
-            return n * DoSafelyRecursively(n - 1);
+            return n * DoBigRecursively(n - 1);
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace ThatBlairGuy.Math
         /// </summary>
         /// <param name="n">The number to calculate the factorial for.</param>
         /// <returns>n-factorial</returns>
-        public static BigInteger DoSafelyQuickly(long n)
+        public static BigInteger DoBigQuickly(long n)
         {
             if (n < 0)
                 throw new ArgumentException($"'{nameof(n)}' must be non-negative.");

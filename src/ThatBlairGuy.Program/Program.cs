@@ -22,11 +22,11 @@ namespace ThatBlairGuy
             TimeSpan checkedTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoIterativelyWithChecking);
 
             // Timing for methods returning a BigInteger.
-            TimeSpan safeIterativeTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoSafelyIteratively);
-            TimeSpan safeRecursiveTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoSafelyRecursively);
-            TimeSpan safeQuickTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoSafelyQuickly);
+            TimeSpan safeIterativeTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoBigIteratively);
+            TimeSpan safeRecursiveTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoBigRecursively);
+            TimeSpan safeQuickTime = bench.TimeIt(int.MaxValue, 20, Factorial.DoBigQuickly);
 
-            String FormatElapsed(TimeSpan ts) => String.Format($"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}")
+            String FormatElapsed(TimeSpan ts) => String.Format($"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}");
 
             System.Console.WriteLine($"Iterative ran in {FormatElapsed(iterativeTime)}");
             System.Console.WriteLine($"Recursive ran in {FormatElapsed(recursiveTime)}");

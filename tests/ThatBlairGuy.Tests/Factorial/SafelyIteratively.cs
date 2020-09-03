@@ -20,7 +20,7 @@ namespace ThatBlairGuy.Tests
         public void SafelyIterative_RangeCheck(long n, string expectedMessage)
         {
             Exception ex = Assert.Throws<ArgumentException> (
-                () => Factorial.DoSafelyIteratively(n)
+                () => Factorial.DoBigIteratively(n)
             );
 
             Assert.Equal(expectedMessage, ex.Message);
@@ -32,7 +32,7 @@ namespace ThatBlairGuy.Tests
         [Theory, MemberData(nameof(BigIntegerValidData))]
         public void SafelyIterative_ValidInputs(Factorial_ValidInput data)
         {
-            BigInteger actual = Factorial.DoSafelyIteratively(data.N);
+            BigInteger actual = Factorial.DoBigIteratively(data.N);
 
             Assert.Equal(data.ExpectedValue, actual);
         }

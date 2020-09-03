@@ -22,7 +22,7 @@ namespace ThatBlairGuy.Tests
         public void SafelyQuickly_RangeCheck(long n, string expectedMessage)
         {
             Exception ex = Assert.Throws<ArgumentException> (
-                () => Factorial.DoSafelyQuickly(n)
+                () => Factorial.DoBigQuickly(n)
             );
 
             Assert.Equal(expectedMessage, ex.Message);
@@ -34,7 +34,7 @@ namespace ThatBlairGuy.Tests
         [Theory, MemberData(nameof(BigIntegerValidData))]
         public void SafelyQuickly_ValidInputs(Factorial_ValidInput data)
         {
-            BigInteger actual = Factorial.DoSafelyQuickly(data.N);
+            BigInteger actual = Factorial.DoBigQuickly(data.N);
 
             Assert.Equal(data.ExpectedValue, actual);
         }

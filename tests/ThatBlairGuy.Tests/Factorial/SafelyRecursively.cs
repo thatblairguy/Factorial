@@ -20,7 +20,7 @@ namespace ThatBlairGuy.Tests
         public void SafelyRescursive_RangeCheck(long n, string expectedMessage)
         {
             Exception ex = Assert.Throws<ArgumentException> (
-                () => Factorial.DoSafelyRecursively(n)
+                () => Factorial.DoBigRecursively(n)
             );
 
             Assert.Equal(expectedMessage, ex.Message);
@@ -32,7 +32,7 @@ namespace ThatBlairGuy.Tests
         [Theory, MemberData(nameof(BigIntegerValidData))]
         public void SafelyRescursive_ValidInputs(Factorial_ValidInput data)
         {
-            BigInteger actual = Factorial.DoSafelyRecursively(data.N);
+            BigInteger actual = Factorial.DoBigRecursively(data.N);
 
             Assert.Equal(data.ExpectedValue, actual);
         }
